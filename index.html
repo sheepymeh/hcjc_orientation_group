@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<script>
+			let studentsList;
+			fetch('students_list.txt').then(res => res.text()).then(students => studentsList = students.split("\n"));
+			function updateList(input = document.getElementsByTagName('input')[0].value) {
+				const DIV = document.getElementsByTagName('div')[0];
+				DIV.innerHTML = '';
+				for (let i = parseInt(input) - 4; i < studentsList.length; i +=33) DIV.innerHTML += `${studentsList[i]}<br>`;
+				DIV.innerHTML += `${DIV.getElementsByTagName('br').length} students are in Group ${input}`
+				console.log();
+			}
+		</script>
+	</head>
+	<body>
+		<input type=number placeholder='Group Number' onkeyup=updateList()>
+		<div></div>
+	</body>
+</html>
