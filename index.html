@@ -3,8 +3,9 @@
 		<title>HCJC Orientation 2020 Grouping</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script>
-			let studentsList;
-			fetch('students_list.txt').then(res => res.text()).then(students => studentsList = students.split("\n"));
+			let studentsHCI, studentsNYGH;
+			fetch('students_hci.txt').then(res => res.text()).then(students => studentsHCI = students.split("\n"));
+			fetch('students_nygh.txt').then(res => res.text()).then(students => studentsNYGH = students.split("\n"));
 			document.addEventListener('DOMContentLoaded', () => {
 				const PARENT = document.getElementById('group-display');
 				document.getElementById('group-input').addEventListener('keyup', () => {
@@ -14,13 +15,20 @@
 						return;
 					}
 					let counter = 0;
-					for (let i = parseInt(input) - 4; i < studentsList.length; i += 33) {
+					for (let i = input - 1; i < studentsNYGH.length; i += 33) {
 						const CHILD = document.createElement('div');
-						CHILD.appendChild(document.createTextNode(studentsList[i]));
+						CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
 						PARENT.appendChild(CHILD);
 						counter++;
 					}
-					PARENT.innerHTML += `<br><div>${counter} HCI (HS) students are in Group ${input}</div>`;
+					for (let i = parseInt(input) - 4; i < studentsHCI.length; i += 33) {
+						if (studentsHCI[i] === undefined) continue;
+						const CHILD = document.createElement('div');
+						CHILD.appendChild(document.createTextNode(`${studentsHCI[i]} (HCI)`));
+						PARENT.appendChild(CHILD);
+						counter++;
+					}
+					PARENT.innerHTML += `<br><div>${counter} HCI &amp; NYGH students are in Group ${input}</div>`;
 				});
 			});
 		</script>
@@ -57,7 +65,7 @@
 		</style>
 	</head>
 	<body>
-		Check your orientation group for HCJC orientation 2020. HCI (HS) students only, adding NYGH students soon.
+		Check your orientation group for HCJC orientation 2020 (IP students only)
 		<input id='group-input' type='number' placeholder='Group Number'>
 		<div id='group-display'>
 			<div>Please type a group number in above</div>
