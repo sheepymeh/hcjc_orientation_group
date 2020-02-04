@@ -8,11 +8,13 @@
 			fetch('students_nygh.txt').then(res => res.text()).then(students => studentsNYGH = students.split("\n"));
 			document.addEventListener('DOMContentLoaded', () => {
 				const PARENT = document.getElementById('group-display');
-				function addChild(content) {
-
+				function makeKid(name) {
+					const CHILD = document.createElement('div');
+					CHILD.appendChild(document.createTextNode(name));
+					return CHILD;
 				}
 				document.getElementById('group-input').addEventListener('keyup', () => {
-					const input = document.getElementById('group-input').value;
+					const input = parseInt(document.getElementById('group-input').value);
 					while (PARENT.lastChild) PARENT.removeChild(PARENT.lastChild);
 					if (input < 1 || input > 33) {
 						const CHILD = document.createElement('div');
@@ -21,28 +23,18 @@
 						PARENT.appendChild()
 						return;
 					}
-					let counter = 0;
-					if (parseInt(input) < 31) {
-						const NY_1 = document.createElement('div');
-						NY_1.appendChild(document.createTextNode(studentsNYGH[parseInt(input) - 1]));
-						PARENT.appendChild(NY_1);
-					}
-					else if (parseInt(input) > 31) {
-						const NY_1 = document.createElement('div');
-						NY_1.appendChild(document.createTextNode(studentsNYGH[parseInt(input) - 2]));
-						PARENT.appendChild(NY_1);
-					}
-					for (let i = parseInt(input) + 31; i < studentsNYGH.length; i += 33) {
-						const CHILD = document.createElement('div');
-						CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
-						PARENT.appendChild(CHILD);
+					if (input < 31)
+						PARENT.appendChild(makeKid(studentsNYGH[input - 1]));
+					else if (input > 31)
+						PARENT.appendChild(makeKid(studentsNYGH[input - 2]));
+					let counter = input == 31 ? 0 : 1;
+					for (let i = input + 31; i < studentsNYGH.length; i += 33) {
+						PARENT.appendChild(makeKid(studentsNYGH[i]));
 						counter++;
 					}
-					for (let i = parseInt(input) - 4; i < studentsHCI.length; i += 33) {
+					for (let i = input - 4; i < studentsHCI.length; i += 33) {
 						if (studentsHCI[i] === undefined) continue;
-						const CHILD = document.createElement('div');
-						CHILD.appendChild(document.createTextNode(`${studentsHCI[i]} (HCI)`));
-						PARENT.appendChild(CHILD);
+						PARENT.appendChild(makeKid(`${studentsHCI[i]} (HCI)`));
 						counter++;
 					}
 					PARENT.innerHTML += `<br><div>${counter + 1} HCI &amp; NYGH students are in Group ${input}</div>`;
@@ -55,6 +47,11 @@
 				color: #fff;
 				font: 20px Roboto, 'Helvetica Neue', sans-serif;
 			}
+			h1, #group-display, input, a {
+				margin: auto;
+				width: 800px;
+				max-width: calc(100% - 24px);
+			}
 			input {
 				-webkit-appearance: none;
 				appearance: none;
@@ -65,8 +62,6 @@
 				margin: 10px auto;
 				padding: 8px 12px;
 				display: block;
-				width: 800px;
-				max-width: calc(100% - 24px);
 			}
 			h1 {
 				margin: 30px auto;
@@ -76,16 +71,16 @@
 				font-weight: 500;
 				text-align: center;
 			}
-			#group-display {
-				margin: auto;
-				width: 800px;
-				max-width: calc(100% - 24px);
-			}
 			#group-display div {
 				padding: 8px 12px;
 			}
 			div:nth-child(odd):not(:last-child) {
 				background-color: #334;
+			}
+			a {
+				margin-top: 24px;
+				color: inherit;
+				display: block;
 			}
 		</style>
 	</head>
@@ -95,5 +90,6 @@
 		<div id='group-display'>
 			<div>Please type a group number in above</div>
 		</div>
+		<a href='https://docs.google.com/spreadsheets/d/1Zz5spnBcN3MN22DLV4BkkTKPfR1DZyOEBsTyLM0br_s'>Data Source (NYGH)</a>
 	</body>
 </html>
