@@ -38,11 +38,19 @@
 				});
 			});
 		</script>
+		<link href='https://rsms.me/inter/inter.css' rel='stylesheet'>
 		<style>
+			html {
+				font: 20px 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+			}
+			@supports (font-variation-settings: normal) {
+				html {
+					font: 20px Roboto, 'Inter var', 'Helvetica Neue', sans-serif;
+				}
+			}
 			body {
 				background-color: #001;
 				color: #fff;
-				font: 20px Roboto, 'Helvetica Neue', sans-serif;
 			}
 			h1, #group-display, input, footer {
 				margin: auto;
