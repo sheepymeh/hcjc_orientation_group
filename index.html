@@ -19,13 +19,21 @@
 						return;
 					}
 					let counter = 0;
-					if (input != 31) {
-						for (let i = parseInt(input) - 1; i < studentsNYGH.length; i += 33) {
-							const CHILD = document.createElement('div');
-							CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
-							PARENT.appendChild(CHILD);
-							counter++;
-						}
+					if (parseInt(input) < 31) {
+						const NY_1 = document.createElement('div');
+						NY_1.appendChild(document.createTextNode(studentsNYGH[parseInt(input) - 1]));
+						PARENT.appendChild(NY_1);
+					}
+					else if (parseInt(input) > 31) {
+						const NY_1 = document.createElement('div');
+						NY_1.appendChild(document.createTextNode(studentsNYGH[parseInt(input) - 2]));
+						PARENT.appendChild(NY_1);
+					}
+					for (let i = parseInt(input) + 31; i < studentsNYGH.length; i += 33) {
+						const CHILD = document.createElement('div');
+						CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
+						PARENT.appendChild(CHILD);
+						counter++;
 					}
 					for (let i = parseInt(input) - 4; i < studentsHCI.length; i += 33) {
 						if (studentsHCI[i] === undefined) continue;
