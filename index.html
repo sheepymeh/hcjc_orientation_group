@@ -113,21 +113,29 @@
 			}
 			footer {
 				margin-top: 24px;
+				font-size: .75rem;
 			}
 			a {
 				color: inherit;
 			}
+			span {
+				display: inline-block;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>Check your orientation group for HCJC orientation 2020 (IP students only)</h1>
+		<h1>
+			<span>Check your orientation group for HCJC orientation 2020</span>
+			<span>(IP students only)</span>
+		</h1>
 		<input id='group-input' type='number' placeholder='Group Number' min='1' max='33'>
 		<div id='group-display'>
 			<div>Please type a group number in above</div>
 		</div>
 		<footer>
 			<a href='https://docs.google.com/spreadsheets/d/1Zz5spnBcN3MN22DLV4BkkTKPfR1DZyOEBsTyLM0br_s'>Data Source (NYGH)</a><br>
-			The information here only serves as a guide and is not official. Made by HCI EC<sup>3</sup>
+			<span>The information here only serves as a guide and is not official.</span>
+			<span>Made by HCI EC<sup>3</sup></span>
 		</footer>
 	</body>
 </html>
