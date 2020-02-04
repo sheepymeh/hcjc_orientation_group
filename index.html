@@ -1,19 +1,66 @@
 <html>
 	<head>
+		<title>HCJC Orientation 2020 Grouping</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script>
 			let studentsList;
 			fetch('students_list.txt').then(res => res.text()).then(students => studentsList = students.split("\n"));
-			function updateList(input = document.getElementsByTagName('input')[0].value) {
-				const DIV = document.getElementsByTagName('div')[0];
-				DIV.innerHTML = '';
-				for (let i = parseInt(input) - 4; i < studentsList.length; i +=33) DIV.innerHTML += `${studentsList[i]}<br>`;
-				DIV.innerHTML += `${DIV.getElementsByTagName('br').length} students are in Group ${input}`
-				console.log();
-			}
+			document.addEventListener('DOMContentLoaded', () => {
+				const PARENT = document.getElementById('group-display');
+				document.getElementById('group-input').addEventListener('keyup', () => {
+					const input = document.getElementById('group-input').value;
+					while (PARENT.lastChild) PARENT.removeChild(PARENT.lastChild);
+					if (input < 1 || input > 33) {
+						return;
+					}
+					let counter = 0;
+					for (let i = parseInt(input) - 4; i < studentsList.length; i += 33) {
+						const CHILD = document.createElement('div');
+						CHILD.appendChild(document.createTextNode(studentsList[i]));
+						PARENT.appendChild(CHILD);
+						counter++;
+					}
+					PARENT.innerHTML += `<br><div>${counter} HCI (HS) students are in Group ${input}</div>`;
+				});
+			});
 		</script>
+		<style>
+			body {
+				background-color: #001;
+				color: #fff;
+				font: 20px Roboto, 'Helvetica Neue', sans-serif;
+			}
+			input {
+				-webkit-appearance: none;
+				appearance: none;
+				color: #fff;
+				background-color: #333;
+				border: 2px solid #fff;
+				font: inherit;
+				margin: 50px auto;
+				padding: 8px 12px;
+				display: block;
+				width: 800px;
+				max-width: calc(100% - 24px);
+			}
+			#group-display {
+				margin: auto;
+				width: 800px;
+				max-width: calc(100% - 24px);
+			}
+			#group-display div {
+				padding: 8px 12px;
+			}
+			div:nth-child(odd):not(:last-child) {
+				background-color: #334;
+			}
+		</style>
 	</head>
 	<body>
-		<input type=number placeholder='Group Number' onkeyup=updateList()>
-		<div></div>
+		Check your orientation group for HCJC orientation 2020. HCI (HS) students only, adding NYGH students soon.
+		<input id='group-input' type='number' placeholder='Group Number'>
+		<div id='group-display'>
+			<div>Please type a group number in above</div>
+		</div>
 	</body>
 </html>
