@@ -12,14 +12,20 @@
 					const input = document.getElementById('group-input').value;
 					while (PARENT.lastChild) PARENT.removeChild(PARENT.lastChild);
 					if (input < 1 || input > 33) {
-						return;
-					}
-					let counter = 0;
-					for (let i = input - 1; i < studentsNYGH.length; i += 33) {
 						const CHILD = document.createElement('div');
 						CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
 						PARENT.appendChild(CHILD);
-						counter++;
+						PARENT.appendChild()
+						return;
+					}
+					let counter = 0;
+					if (input != 31) {
+						for (let i = parseInt(input) - 1; i < studentsNYGH.length; i += 33) {
+							const CHILD = document.createElement('div');
+							CHILD.appendChild(document.createTextNode(studentsNYGH[i]));
+							PARENT.appendChild(CHILD);
+							counter++;
+						}
 					}
 					for (let i = parseInt(input) - 4; i < studentsHCI.length; i += 33) {
 						if (studentsHCI[i] === undefined) continue;
@@ -51,6 +57,13 @@
 				width: 800px;
 				max-width: calc(100% - 24px);
 			}
+			h1 {
+				margin: auto;
+				width: 800px;
+				max-width: calc(100% - 24px);
+				font-size: 1.2rem;
+				font-weight: 500;
+			}
 			#group-display {
 				margin: auto;
 				width: 800px;
@@ -65,8 +78,8 @@
 		</style>
 	</head>
 	<body>
-		Check your orientation group for HCJC orientation 2020 (IP students only)
-		<input id='group-input' type='number' placeholder='Group Number'>
+		<h1>Check your orientation group for HCJC orientation 2020 (IP students only)</h1>
+		<input id='group-input' type='number' placeholder='Group Number' min='1' max='33'>
 		<div id='group-display'>
 			<div>Please type a group number in above</div>
 		</div>
